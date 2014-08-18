@@ -1,0 +1,17 @@
+{
+  "name": "json",
+  "version": "1.0.1",
+  "description": "javascript json parse",
+  "homepage": "http://github.com/hechangmin/json",
+  "main": "./js/json.min.js",
+  "keywords": ["json"],
+  "author": {
+    "name": "hechangmin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hechangmin/json.git"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
