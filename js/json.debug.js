@@ -6,7 +6,7 @@
 
 if (typeof JSON !== 'object') {    
 
-    var JSON = function(){
+    JSON = function(){
 
         /**
          * 获取数据类型
