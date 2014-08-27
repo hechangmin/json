@@ -6,7 +6,7 @@
 
 if (typeof JSON !== 'object') {    
 
-    JSON = function(){
+    this.JSON = function(){
 
         /**
          * 获取数据类型
@@ -28,8 +28,9 @@ if (typeof JSON !== 'object') {
              */
             parse : function (strJson){
                 try {
+                    /*jshint evil:true, boss:true */
                     return eval('(' + strJson + ')');
-                }catch(error){
+                }catch(err){
                     throw new SyntaxError('JSON.parse');
                 }
             },
@@ -42,6 +43,9 @@ if (typeof JSON !== 'object') {
              */
             stringify : function (object){
                 var type = getType(object);
+                var results = [];
+                var value;
+
                 switch (type){
                     case 'Undefined':
                         return;
@@ -59,22 +63,20 @@ if (typeof JSON !== 'object') {
                                 var a = arguments[0];
                                 return  (a == '\n') ? '\\n':
                                 (a == '\r') ? '\\r':
-                                (a == '\t') ? '\\t': ""
+                                (a == '\t') ? '\\t': "";
                             }) + '"';
 
                     case 'Object':
-                        var results = [];
                         for (var property in object) {
-                            var value = arguments.callee(object[property]);
+                            value = arguments.callee(object[property]);
                             if (value !== undefined){
                                 results.push(arguments.callee(property) + ':' + value);
                             }
                         }
                         return '{' + results.join(',') + '}';
                     case 'Array':
-                        var results = [];
                         for(var i = 0, nLen = object.length; i < nLen; i++){
-                            var value = arguments.callee(object[i]);
+                            value = arguments.callee(object[i]);
                             if (value !== undefined){
                                 results.push(value);
                             }
@@ -82,6 +84,6 @@ if (typeof JSON !== 'object') {
                         return '[' + results.join(',') + ']';
                 }
             }
-        }
+        };
     }(); 
 }
